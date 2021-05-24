@@ -1,0 +1,29 @@
+--- 
+- 
+  apt: 
+    update_cache: true
+  name: "Run the equivalent of \"apt-get update\" as a separate step"
+- 
+  copy: "src=my.cnf.j2 dest=/root/.my.cnf owner=root group=root mode=0600"
+  name: "Add .my.cnf"
+- 
+  mysql_user: "login_user=root login_password=\"enter\" user=root password=\"enter\""
+  name: "Set the root password"
+- 
+  mysql_user: "login_user=root login_password=\"enter\" user=root password=\"enter\" host=\"::1\""
+  name: "Secure the root user for IPV6 localhost (::1)"
+- 
+  mysql_user: "login_user=root login_password=\"enter\" user=root password=\"enter\" host=\"127.0.0.1\""
+  name: "Secure the root user for IPV4 localhost (127.0.0.1)"
+- 
+  mysql_user: "login_user=root login_password=\"enter\" user=root password=\"enter\" host=\"localhost\""
+  name: "Secure the root user for localhost domain"
+- 
+  mysql_user: "login_user=root login_password=\"enter\" user=root password=\"enter\" host=\"{{ ansible_fqdn }}\""
+  name: "Secure the root user for server_hostname domain"
+- 
+  mysql_user: "login_user=root login_password=\"enter\" user=\"root\" host_all=yes state=absent"
+  name: "Deletes anonymous server user"
+- 
+  mysql_db: "login_user=root login_password=\"enter\" db=test state=absent"
+  name: "Removes the test database"

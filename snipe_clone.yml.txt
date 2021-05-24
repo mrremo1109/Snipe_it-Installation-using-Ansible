@@ -1,0 +1,14 @@
+---
+- hosts: node1
+  user: vagrant
+  become: true
+  tasks:
+   - name: Snipe It Clone
+     git:
+         repo: https://github.com/snipe/snipe-it.git
+         dest: /var/www/snipeit
+         update: no
+   -  name: Copy file with owner and permissions
+      template:
+         src: .env
+         dest: /var/www/snipeit/.env
