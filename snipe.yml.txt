@@ -1,0 +1,32 @@
+---
+- hosts: node1
+  become: true
+  user: vagrant
+  tasks:
+   - name: Generating Key
+     shell: sudo php artisan key:generate --force
+     args:
+       chdir: /var/www/snipeit/
+
+
+   -  name: replace snipeit.conf
+      copy:
+        src: snipeit.conf
+        dest: /etc/apache2/sites-available/snipeit.conf
+
+   - name: Generating Key
+     shell: sudo a2enmod rewrite
+     args:
+       chdir: /etc/apache2/sites-available/
+
+   - name: Ensite
+     shell: sudo a2ensite snipeit.conf
+     args:
+       chdir: /etc/apache2/sites-available/
+   - name: Dissite
+     shell: sudo a2dissite 000-default.conf
+     args:
+       chdir: /etc/apache2/sites-available/
+
+   - name: Restart apache
+     service: name=apache2 state=restarted
