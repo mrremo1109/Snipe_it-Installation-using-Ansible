@@ -1,8 +1,4 @@
 ---
-- hosts: node1
-  become: true
-  user: vagrant
-  tasks: 
    - name: Installing dependencies for Mariadb
      apt: name=software-properties-common
 
