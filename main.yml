@@ -1,0 +1,19 @@
+---
+- hosts: node1
+  become: true
+  gather_facts: true
+  tasks:
+  - name: Update
+    apt:
+     update_cache: yes
+  - include_tasks: apache.yml
+  - include_tasks: mariadb.yml
+  - include_tasks: php.yml
+  - include_tasks: mysqlsecure.yml
+  - include_tasks: php_ini.yml
+  - include_tasks: create_database.yml
+  - include_tasks: composer_install.yml
+  - include_tasks: snipeit_install.yml
+  - include_tasks: snipe_clone.yml
+  - include_tasks: snipe.yml
+
