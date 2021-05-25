@@ -1,8 +1,4 @@
 ---
-- hosts: node1
-  become: true
-  user: vagrant
-  tasks:
    - name: Create a new database
      mysql_db:
        login_user: root
@@ -18,5 +14,6 @@
        password: snipeituserpass
        priv: '*.*:ALL'
        state: present
-   - name: Flush Privileges
+  
+  - name: Flush Privileges
      shell: sudo systemctl restart mariadb
