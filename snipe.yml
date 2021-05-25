@@ -1,8 +1,4 @@
 ---
-- hosts: node1
-  become: true
-  user: vagrant
-  tasks:
    - name: Generating Key
      shell: sudo php artisan key:generate --force
      args:
